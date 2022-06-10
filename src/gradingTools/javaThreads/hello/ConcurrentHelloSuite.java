@@ -7,13 +7,16 @@ import org.junit.runners.Suite;
 
 import grader.basics.config.BasicExecutionSpecificationSelector;
 import grader.basics.junit.BasicJUnitUtils;
+import gradingTools.javaThreads.hello.execution.ConcurrencyExecutionChecks;
+import gradingTools.javaThreads.hello.source.ConcurrencySourceChecks;
+import gradingTools.javaThreads.hello.style.ConcurrencyStyleChecks;
 import gradingTools.shared.testcases.AssignmentSuiteSkeleton;
 import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	ConcurrentHelloClassProvided.class,
-	ConcurrentHelloRun.class,
-	ConcurrencySourceChecks.class
+	ConcurrencyExecutionChecks.class,
+	ConcurrencySourceChecks.class,
+	ConcurrencyStyleChecks.class
 	
 //	GreetingCheckstyle.class
 })

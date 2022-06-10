@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello;
+package gradingTools.javaThreads.hello.execution;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;

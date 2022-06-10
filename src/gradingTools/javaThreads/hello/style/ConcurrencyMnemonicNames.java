@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello;
+package gradingTools.javaThreads.hello.style;
 
 import grader.basics.junit.NotAutomatableException;
 import grader.basics.junit.TestCaseResult;

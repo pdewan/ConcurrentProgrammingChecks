@@ -1,12 +1,12 @@
-package gradingTools.javaThreads.hello;
+package gradingTools.javaThreads.hello.source;
 
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleClassInstantiatedTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodCalledTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodDefinedTestCase;
 
-public class HelloInstantiatesThread extends CheckstyleClassInstantiatedTestCase {
-	public HelloInstantiatesThread() {
-		super("Hello", "Thread");
+public class HelloInstantiatesHelloWorker extends CheckstyleClassInstantiatedTestCase {
+	public HelloInstantiatesHelloWorker() {
+		super("Hello", "default.HelloWorker");
 		// TODO Auto-generated constructor stub
 	}
 

@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello;
+package gradingTools.javaThreads.hello.source;
 
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleInterfaceDefinedTestCase;
 import util.annotations.MaxValue;

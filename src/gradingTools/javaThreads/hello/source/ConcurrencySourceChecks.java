@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello;
+package gradingTools.javaThreads.hello.source;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -14,7 +14,6 @@ import util.annotations.MaxValue;
 	HelloCallsThreadStart.class,
 	HelloCallsThreadJoin.class,
 	HelloWorkerCallsPrint.class,
-	
 
 })
 @Explanation("Checks source code constraints")
