@@ -10,6 +10,11 @@ public class ConcurrentHelloClassProvided extends TaggedOrNamedClassTest {
 
 	@Override
 	protected String tag() {
+//		String retVal = ConcurrentHelloSuite.getMainClass();
+//		if (retVal != null) {
+//			return retVal;
+//		}
+		
 		return CONCURRENT_HELLO_CLASS_NAME;
 	}
 

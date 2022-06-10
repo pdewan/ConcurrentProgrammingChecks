@@ -35,7 +35,7 @@ public class ConcurrentHelloRun extends PassFailJUnitTestCase {
 
 	protected TestCaseResult runAndCheck(Class aMainClass, int aNumThreads) throws Throwable {
 		args[0] = Integer.toString(aNumThreads);
-		checker = new AHelloOutputChecker(aNumThreads);
+		checker = new AHelloThreadOutputChecker(aNumThreads);
 		ResultingOutErr aResult = BasicProjectExecution.invokeMain(aMainClass, args, inputs);
 		LinesMatcher aLinesMatcher = aResult.getLinesMatcher();
 //		LinesMatcher aLineMatcher =  new ALinesMatcher(anOutputLines);
@@ -46,6 +46,17 @@ public class ConcurrentHelloRun extends PassFailJUnitTestCase {
 			String anExpectedLines = Arrays.toString(checker.getSubstrings());
 
 			return fail("Output did not match:" + anExpectedLines);
+
+		}
+		int aLastLineMatched = aLinesMatcher.getMaxMatchedLineNumber();
+		checker = new AHelloMainOutputChecker();
+		aLinesMatcher.setStartLineNumber(aLastLineMatched + 1);
+		
+		 aRetval = checker.check(aLinesMatcher, LinesMatchKind.ONE_TIME_LINE, Pattern.DOTALL);
+		if (!aRetval) {
+			String anExpectedLines = Arrays.toString(checker.getSubstrings());
+
+			return fail("Output, starting at line " + (aLastLineMatched + 1) + ""+ " did not match:" + anExpectedLines);
 
 		}
 		return pass();
