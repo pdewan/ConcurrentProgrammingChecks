@@ -8,7 +8,7 @@ import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	ConcurrentHelloClassProvided.class,
-	ConcurrentHelloRun.class,	
+	ConcurrentHelloRunMultipleArgs.class,	
 
 })
 @Explanation("Checks execution constraints")

@@ -39,7 +39,7 @@ import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
-public class ConcurrentHelloRun extends PassFailJUnitTestCase {
+public class ConcurrentHelloRunMultipleArgs extends PassFailJUnitTestCase {
 //	public static final int TIME_OUT_SECS = 1; // secs
 	protected SubstringSequenceChecker checker;	
 	protected String[] args = {"5"};
@@ -47,7 +47,7 @@ public class ConcurrentHelloRun extends PassFailJUnitTestCase {
 	protected ConcurrentPropertyChangeSupport concurrentPropertyChangeSupport;;
 
 
-	public ConcurrentHelloRun() {
+	public ConcurrentHelloRunMultipleArgs() {
 	}
 	protected static PrintStream originalOut = System.out;
     protected ObservablePrintStream redirectOutput() {    	
