@@ -24,6 +24,7 @@ import grader.basics.trace.output.BasicPrintStreamListener;
 import grader.basics.trace.output.ObservablePrintStream;
 import grader.basics.trace.output.ObservablePrintStreamFactory;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
+import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinOutputObserver;
 import gradingTools.shared.testcases.concurrency.propertyChanges.AbstractConcurrentEventSupport;
 import gradingTools.shared.testcases.concurrency.propertyChanges.BasicConcurrentPropertyChangeSupport;
 import gradingTools.shared.testcases.concurrency.propertyChanges.ConcurrentEvent;
@@ -73,7 +74,7 @@ public abstract class AbstractHelloExecution extends AbstractForkJoinOutputObser
 	}
 
 	@Override
-	SubstringSequenceChecker rootThreadChecker() {
+	protected SubstringSequenceChecker rootThreadChecker() {
 		return new AHelloRootPostJoinChecker();
 	}
 	@Override
