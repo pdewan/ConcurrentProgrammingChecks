@@ -10,7 +10,7 @@ protected   String[] myPatterns;
 public AHelloPostForkChecker (int aNumThreads) {
 	myPatterns = new String[aNumThreads];
 	for (int i = 0; i < aNumThreads; i++) {
-		myPatterns[i] = ".*ello.*" + i + ".*";
+		myPatterns[i] = ".*" + i + ".*ello.*" + ".*";
 	}
 	init ( myPatterns);
 		

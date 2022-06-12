@@ -5,7 +5,7 @@ import gradingTools.shared.testcases.ASubstringSequenceChecker;
 public class AHelloRootPostJoinChecker extends ASubstringSequenceChecker {
 	
 	
-protected   String[] MY_PATTERNS = {".*ello.*" + "main" + ".*"};
+protected   String[] MY_PATTERNS = {".*oot.*" + ".*ello.*" + ".*"};
 	
 public AHelloRootPostJoinChecker () {
 	

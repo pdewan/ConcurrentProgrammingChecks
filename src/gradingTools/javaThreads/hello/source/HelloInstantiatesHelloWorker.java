@@ -7,7 +7,6 @@ import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodDefinedTest
 public class HelloInstantiatesHelloWorker extends CheckstyleClassInstantiatedTestCase {
 	public HelloInstantiatesHelloWorker() {
 		super("Hello", "default.HelloWorker");
-		// TODO Auto-generated constructor stub
 	}
 
 }

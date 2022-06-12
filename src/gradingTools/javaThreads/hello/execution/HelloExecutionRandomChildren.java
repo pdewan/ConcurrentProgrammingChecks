@@ -5,7 +5,7 @@ import grader.basics.junit.TestCaseResult;
 import grader.basics.project.NotGradableException;
 import grader.basics.project.Project;
 import util.annotations.MaxValue;
-@MaxValue(2)
+@MaxValue(30)
 public class HelloExecutionRandomChildren extends AbstractHelloExecution {
 	public static int MAX_THREADS = 10;
 	int numThreads;

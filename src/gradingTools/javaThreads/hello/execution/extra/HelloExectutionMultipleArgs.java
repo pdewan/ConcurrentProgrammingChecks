@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello.execution;
+package gradingTools.javaThreads.hello.execution.extra;
 
 import java.beans.PropertyChangeEvent;
 import java.io.PrintStream;
@@ -23,6 +23,8 @@ import grader.basics.trace.output.BasicPositiveOutputSelector;
 import grader.basics.trace.output.BasicPrintStreamListener;
 import grader.basics.trace.output.ObservablePrintStream;
 import grader.basics.trace.output.ObservablePrintStreamFactory;
+import gradingTools.javaThreads.hello.execution.AHelloPostForkChecker;
+import gradingTools.javaThreads.hello.execution.AHelloRootPostJoinChecker;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
 import gradingTools.shared.testcases.concurrency.propertyChanges.AbstractConcurrentEventSupport;
 import gradingTools.shared.testcases.concurrency.propertyChanges.BasicConcurrentPropertyChangeSupport;

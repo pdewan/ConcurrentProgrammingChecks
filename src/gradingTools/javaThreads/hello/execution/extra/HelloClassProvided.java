@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello.execution;
+package gradingTools.javaThreads.hello.execution.extra;
 
 import gradingTools.shared.testcases.NameMatchClassTest;
 import gradingTools.shared.testcases.NamedClassTest;

@@ -2,13 +2,12 @@ package gradingTools.javaThreads.hello.source;
 
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodCalledTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodDefinedTestCase;
+import gradingTools.basics.sharedTestCase.checkstyle.predefined.ClassCallsParseInt;
 
-public class HelloCallsParseInt extends CheckstyleMethodCalledTestCase {
-//	[INFO] D:\dewan_backup\Java\grail13\.\src\greeting\Cls.java:6: Expected signature main:String[]->void in type greeting.Cls:[@Comp301Tags.GREETING_MAIN]. Good! [ExpectedSignatures]
-//	[WARN] D:\dewan_backup\Java\grail13\.\src\greeting\Cls.java:6: Missing signature main:String[]->void in type greeting.Cls:[@Comp301Tags.GREETING_MAIN]. [ExpectedSignatures]
+public class HelloCallsParseInt extends ClassCallsParseInt {
+
 	public HelloCallsParseInt() {
-		super("Hello", "java.lang.Integer!parseInt:String->int");
-		// TODO Auto-generated constructor stub
+		super("Hello");
 	}
 
 }
