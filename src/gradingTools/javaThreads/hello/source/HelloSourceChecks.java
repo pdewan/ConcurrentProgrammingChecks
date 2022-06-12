@@ -18,7 +18,7 @@ import util.annotations.MaxValue;
 })
 @Explanation("Checks source code constraints")
 @MaxValue(10)
-public class ConcurrencySourceChecks {
+public class HelloSourceChecks {
 
 	
 }

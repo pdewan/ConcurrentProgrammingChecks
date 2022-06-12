@@ -2,12 +2,12 @@ package gradingTools.javaThreads.hello.execution;
 
 import gradingTools.shared.testcases.ASubstringSequenceChecker;
 
-public class AHelloMainOutputChecker extends ASubstringSequenceChecker {
+public class AHelloRootPostJoinChecker extends ASubstringSequenceChecker {
 	
 	
 protected   String[] MY_PATTERNS = {".*ello.*" + "main" + ".*"};
 	
-public AHelloMainOutputChecker () {
+public AHelloRootPostJoinChecker () {
 	
 	init ( MY_PATTERNS);
 		

@@ -5,11 +5,11 @@ import gradingTools.shared.testcases.NamedClassTest;
 import gradingTools.shared.testcases.TaggedClassTest;
 import gradingTools.shared.testcases.TaggedOrNamedClassTest;
 
-public class ConcurrentHelloClassProvided extends TaggedOrNamedClassTest {
+public class HelloClassProvided extends TaggedOrNamedClassTest {
 	public static final String CONCURRENT_HELLO_CLASS_NAME = "Hello";
 
 	@Override
-	protected String tag() {
+	protected String mainClassIdentifier() {
 //		String retVal = ConcurrentHelloSuite.getMainClass();
 //		if (retVal != null) {
 //			return retVal;

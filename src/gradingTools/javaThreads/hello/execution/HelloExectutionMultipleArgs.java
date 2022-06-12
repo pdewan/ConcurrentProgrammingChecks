@@ -39,7 +39,7 @@ import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
-public class ConcurrentHelloRunMultipleArgs extends PassFailJUnitTestCase {
+public class HelloExectutionMultipleArgs extends PassFailJUnitTestCase {
 //	public static final int TIME_OUT_SECS = 1; // secs
 	protected SubstringSequenceChecker checker;	
 	protected String[] args = {"5"};
@@ -47,7 +47,7 @@ public class ConcurrentHelloRunMultipleArgs extends PassFailJUnitTestCase {
 	protected ConcurrentPropertyChangeSupport concurrentPropertyChangeSupport;;
 
 
-	public ConcurrentHelloRunMultipleArgs() {
+	public HelloExectutionMultipleArgs() {
 	}
 	protected static PrintStream originalOut = System.out;
     protected ObservablePrintStream redirectOutput() {    	
@@ -81,7 +81,7 @@ public class ConcurrentHelloRunMultipleArgs extends PassFailJUnitTestCase {
 
 		}
 		int aLastLineMatched = aLinesMatcher.getMaxMatchedLineNumber();
-		checker = new AHelloMainOutputChecker();
+		checker = new AHelloRootPostJoinChecker();
 		aLinesMatcher.setStartLineNumber(aLastLineMatched + 1);
 		
 		 aRetval = checker.check(aLinesMatcher, LinesMatchKind.ONE_TIME_LINE, Pattern.DOTALL);
@@ -104,7 +104,7 @@ public class ConcurrentHelloRunMultipleArgs extends PassFailJUnitTestCase {
     }
 	protected TestCaseResult runAndCheck(Class aMainClass, int aNumThreads) throws Throwable {
 		args[0] = Integer.toString(aNumThreads);
-		checker = new AHelloThreadOutputChecker(aNumThreads);
+		checker = new AHelloPostForkChecker(aNumThreads);
 		ObservablePrintStream aRedirectedStrean = redirectOutput();
 		receivePropertyChanges(aRedirectedStrean);
 		ResultingOutErr aResult = BasicProjectExecution.invokeMain(aMainClass, args, inputs);
@@ -165,7 +165,7 @@ public class ConcurrentHelloRunMultipleArgs extends PassFailJUnitTestCase {
 //			String anOutput = aRunningProject.await();
 //			LinesMatcher aLinesMatcher = aRunningProject.getLinesMatcher();
 
-			Class aMainClass = getTaggedClass(project, ConcurrentHelloClassProvided.class);
+			Class aMainClass = getTaggedClass(project, HelloClassProvided.class);
 			TestCaseResult retVal = pass();;
 			for (int aNumThreads = 1; aNumThreads < 10; aNumThreads++) {
 				retVal = runAndCheck(aMainClass, aNumThreads);

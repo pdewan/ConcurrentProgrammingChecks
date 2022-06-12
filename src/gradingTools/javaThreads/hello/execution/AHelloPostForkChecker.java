@@ -2,12 +2,12 @@ package gradingTools.javaThreads.hello.execution;
 
 import gradingTools.shared.testcases.ASubstringSequenceChecker;
 
-public class AHelloThreadOutputChecker extends ASubstringSequenceChecker {
+public class AHelloPostForkChecker extends ASubstringSequenceChecker {
 	
 	
 protected   String[] myPatterns;
 	
-public AHelloThreadOutputChecker (int aNumThreads) {
+public AHelloPostForkChecker (int aNumThreads) {
 	myPatterns = new String[aNumThreads];
 	for (int i = 0; i < aNumThreads; i++) {
 		myPatterns[i] = ".*ello.*" + i + ".*";

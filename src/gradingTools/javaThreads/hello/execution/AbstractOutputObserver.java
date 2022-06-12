@@ -24,6 +24,7 @@ import grader.basics.trace.output.BasicPrintStreamListener;
 import grader.basics.trace.output.ObservablePrintStream;
 import grader.basics.trace.output.ObservablePrintStreamFactory;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
+import gradingTools.shared.testcases.TaggedOrNamedClassTest;
 import gradingTools.shared.testcases.concurrency.propertyChanges.AbstractConcurrentEventSupport;
 import gradingTools.shared.testcases.concurrency.propertyChanges.BasicConcurrentPropertyChangeSupport;
 import gradingTools.shared.testcases.concurrency.propertyChanges.ConcurrentEvent;
@@ -39,11 +40,12 @@ import gradingTools.shared.testcases.utils.LinesMatcher;
 import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
-public abstract class AbstractOutputObserver extends PassFailJUnitTestCase {
+public abstract class AbstractOutputObserver extends TaggedOrNamedClassTest {
 	private ConcurrentPropertyChangeSupport concurrentPropertyChangeSupport;
 	private ResultingOutErr resultingOutErr;
 	public static final int CONCURRENT_PROGRAM_MAX_TIME = 1000;
 	public AbstractOutputObserver() {
+		
 	}
 	protected Selector positiveSelector() {
 		return new BasicPositiveOutputSelector();
@@ -71,8 +73,8 @@ public abstract class AbstractOutputObserver extends PassFailJUnitTestCase {
 		return emptyArray;
 	}
 
-	protected long timeOut() {
-		return CONCURRENT_PROGRAM_MAX_TIME;
+	protected int timeOut() {
+		return BasicProjectExecution.getMethodTimeOut();
 	}
 	protected static PrintStream originalOut = System.out;
     protected ObservablePrintStream redirectOutput() {    	
@@ -80,12 +82,14 @@ public abstract class AbstractOutputObserver extends PassFailJUnitTestCase {
 //		aRedirectedStream.addPropertyChangeListener(new BasicPrintStreamListener());
 		aRedirectedStream.addPositiveSelector(positiveSelector());
 		aRedirectedStream.addNegativeSelector(negativeSelector());
+		aRedirectedStream.setRedirectionFrozen(false);
+
 		System.setOut((PrintStream) aRedirectedStream);
 		return aRedirectedStream;
     }
-    protected void receivePropertyChanges(PropertyListenerRegisterer aRegisterer) {
+    protected void receivePropertyChanges() {
     	concurrentPropertyChangeSupport = new BasicConcurrentPropertyChangeSupport();
-    	aRegisterer.addPropertyChangeListener(concurrentPropertyChangeSupport);
+    	observablePrintStream.addPropertyChangeListener(concurrentPropertyChangeSupport);
 		Selector<ConcurrentPropertyChangeSupport> aWaitSelector = waitSelector();
 		if (aWaitSelector != null) {
 	    	concurrentPropertyChangeSupport.addtWaitSelector(aWaitSelector);
@@ -94,11 +98,17 @@ public abstract class AbstractOutputObserver extends PassFailJUnitTestCase {
     
     protected void restoreOutput() {
     	System.setOut(originalOut);
+//    	observablePrintStream.removePropertyChangeListener(concurrentPropertyChangeSupport);
+//    	observablePrintStream.setRedirectionFrozen(true);
+    }
+    protected void doNotReceiveEvents() {
+    	observablePrintStream.removePropertyChangeListener(concurrentPropertyChangeSupport);
+    	observablePrintStream.setRedirectionFrozen(true);
     }
     protected  TestCaseResult checkOutput() {
     	return pass();
     }
-    protected  TestCaseResult checkEvents(ConcurrentPropertyChangeSupport aConcurrencySupport) {
+    protected  TestCaseResult checkEvents() {
     	return pass();
     }
     protected void waitForTermination() {
@@ -110,24 +120,37 @@ public abstract class AbstractOutputObserver extends PassFailJUnitTestCase {
 			concurrentPropertyChangeSupport.timeOutBasedWait(aTimeOut);
 		}
     }
-	protected TestCaseResult runAndCheck(Class aMainClass, String[] anArgs, String[] anInputs) throws Throwable {		
-		ObservablePrintStream aRedirectedStrean = redirectOutput();
-		receivePropertyChanges(aRedirectedStrean);
+    protected ObservablePrintStream observablePrintStream;
+	public ObservablePrintStream getObservablePrintStream() {
+		return observablePrintStream;
+	}
+	protected void invokeMainMethod(Class aMainClass, String[] anArgs, String[] anInputs) throws Throwable {
 		resultingOutErr = BasicProjectExecution.invokeMain(aMainClass, anArgs, anInputs);
+		
+	}
+	protected TestCaseResult runAndCheck(Class aMainClass, String[] anArgs, String[] anInputs) throws Throwable {		
+		observablePrintStream = redirectOutput();
+		receivePropertyChanges();
+		BasicProjectExecution.setMethodTimeOut(timeOut());
+		invokeMainMethod(aMainClass, anArgs, anInputs);
 		waitForTermination();
 		restoreOutput();
+		doNotReceiveEvents();
 		TestCaseResult aRetValOut = checkOutput();
-		TestCaseResult aRetValEvents = checkEvents(concurrentPropertyChangeSupport);
+		TestCaseResult aRetValEvents = checkEvents();
 		if (aRetValOut.isPass() && aRetValEvents.isPass()) {
 			return pass();
 		}
-		if (aRetValOut.isFail() && aRetValEvents.isFail()) {
-			return fail(aRetValOut.getNotes() + " " + aRetValEvents.getNotes());
-		}
-		if (!aRetValEvents.isPass()) {
-			return partialPass(0.2, aRetValEvents.getNotes());
-		}
-		return partialPass(0.8, aRetValOut.getNotes());
+		return partialPass(
+				aRetValOut.getPercentage() + aRetValEvents.getPercentage(),
+				aRetValOut.getNotes() + "\n" + aRetValEvents.getNotes());
+//		if (aRetValOut.isFail() && aRetValEvents.isFail()) {
+//			return fail(aRetValOut.getNotes() + " " + aRetValEvents.getNotes());
+//		}
+//		if (!aRetValEvents.isPass()) {
+//			return partialPass(0.2, aRetValEvents.getNotes());
+//		}
+//		return partialPass(0.8, aRetValOut.getNotes());
 //		return checkEvents(aNumThreads);
 
 	}
@@ -137,7 +160,7 @@ public abstract class AbstractOutputObserver extends PassFailJUnitTestCase {
 			NotGradableException {
 		try {
 			Class aMainClass = mainClass();
-			TestCaseResult retVal = pass();;
+			TestCaseResult retVal = 
 			runAndCheck(aMainClass, args(), inputs());
 			return retVal;			
 
