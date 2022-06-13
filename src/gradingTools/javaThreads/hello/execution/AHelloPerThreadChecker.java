@@ -4,7 +4,7 @@ import gradingTools.shared.testcases.ASubstringSequenceChecker;
 
 public class AHelloPerThreadChecker extends ASubstringSequenceChecker {
 	
-protected String[] MY_PATTERNS = {".*ello.*"};;
+protected String[] MY_PATTERNS = {"Thread.*->.*Greeting:.*Hello World.*"};;
 	
 public AHelloPerThreadChecker () {
 	
