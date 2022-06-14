@@ -1,6 +1,6 @@
 package gradingTools.javaThreads.hello.execution;
 
-import gradingTools.shared.testcases.concurrency.propertyChanges.Selector;
+import grader.basics.concurrency.propertyChanges.Selector;
 
 public class HelloPositiveOutputSelector implements Selector{
 	@Override
