@@ -29,8 +29,6 @@ import grader.basics.output.observer.ObservablePrintStreamFactory;
 import grader.basics.project.NotGradableException;
 import grader.basics.project.Project;
 import grader.basics.testcase.PassFailJUnitTestCase;
-import gradingTools.javaThreads.hello.execution.AHelloPostForkChecker;
-import gradingTools.javaThreads.hello.execution.AHelloRootPostJoinChecker;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
 import gradingTools.shared.testcases.greeting.AGreetingChecker;
 import gradingTools.shared.testcases.greeting.GreetingMainProvided;

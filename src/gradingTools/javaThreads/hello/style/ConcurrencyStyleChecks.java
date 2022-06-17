@@ -13,7 +13,7 @@ import util.annotations.MaxValue;
 })
 @Explanation("Checks style constraints")
 @MaxValue(10)
-public class HelloStyleChecks {
+public class ConcurrencyStyleChecks {
 
 	
 }

@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.hello.source;
+package gradingTools.javaThreads.primes.source;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -9,18 +9,18 @@ import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 //	HelloMainDefined.class,
-	HelloCallsParseInt.class,
-	HelloInstantiatesThread.class,
-	HelloInstantiatesHelloWorker.class,
-	HelloCallsThreadStart.class,
-	HelloCallsThreadJoin.class,
-	HelloWorkerISARunnable.class,
-	HelloWorkerCallsPrintln.class,
+	PrimesCallsParseInt.class,
+	PrimesInstantiatesThread.class,
+	PrimesInstantiatesPrimesWorker.class,
+	PrimeCallsThreadStart.class,
+	PrimesCallsThreadJoin.class,
+	PrimesWorkerISARunnable.class,
+	PrimesWorkerCallsPrintln.class,
 
 })
 @Explanation("Checks source code constraints")
 @MaxValue(10)
-public class HelloSourceChecks {
+public class PrimesSourceChecks {
 
 	
 }

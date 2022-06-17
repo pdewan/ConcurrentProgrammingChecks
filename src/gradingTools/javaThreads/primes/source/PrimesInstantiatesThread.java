@@ -1,14 +1,14 @@
-package gradingTools.javaThreads.hello.source;
+package gradingTools.javaThreads.primes.source;
 
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleClassInstantiatedTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodCalledTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodDefinedTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.predefined.RootClassInstantiatesThread;
-import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
+import gradingTools.javaThreads.primes.ConcurrentPrimesSuite;
 
-public class HelloInstantiatesThread extends RootClassInstantiatesThread {
-	public HelloInstantiatesThread() {
-		super(ConcurrentHelloSuite.ROOT_CLASS);
+public class PrimesInstantiatesThread extends RootClassInstantiatesThread {
+	public PrimesInstantiatesThread() {
+		super(ConcurrentPrimesSuite.ROOT_CLASS);
 	}
 
 }

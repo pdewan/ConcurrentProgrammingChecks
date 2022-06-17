@@ -26,9 +26,11 @@ import grader.basics.output.observer.BasicPositiveOutputSelector;
 import grader.basics.output.observer.BasicPrintStreamListener;
 import grader.basics.output.observer.ObservablePrintStream;
 import grader.basics.output.observer.ObservablePrintStreamFactory;
+import grader.basics.output.observer.PropertyBasedStringChecker;
 import grader.basics.project.NotGradableException;
 import grader.basics.project.Project;
 import grader.basics.testcase.PassFailJUnitTestCase;
+import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
 import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinOutputObserver;
 import gradingTools.shared.testcases.greeting.AGreetingChecker;
@@ -41,11 +43,14 @@ import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
 public abstract class AbstractHelloExecution extends AbstractForkJoinOutputObserver {
-	public static final String CONCURRENT_HELLO_CLASS_NAME = "Hello";
+//	public static final String CONCURRENT_HELLO_CLASS_NAME = "Hello";
+	public static final Object[][] GREETING_DESCRIPTOR = {
+			{"Greeting", String.class}
+	};
 
 	@Override
 	protected String mainClassIdentifier() {
-		return CONCURRENT_HELLO_CLASS_NAME;
+		return ConcurrentHelloSuite.ROOT_CLASS;
 
 	}
 	protected String[] args = {"1"};
@@ -55,57 +60,102 @@ public abstract class AbstractHelloExecution extends AbstractForkJoinOutputObser
 		return args;
 	}
 	
-	
 	protected Class mainClass() {
 		return findClassByName(mainClassIdentifier());
 	}
 	@Override
-	protected SubstringSequenceChecker preForkChecker() {
+	protected Object[][] preForkPropertyNamesAndType() {
 		return null;
 	}
-
 	@Override
-	protected SubstringSequenceChecker postForkChecker() {
-		return new AHelloPostForkChecker(numExpectedForkedThreads());	}
-
-	@Override
-	protected SubstringSequenceChecker postJoinChecker() {
-		return new AHelloRootPostJoinChecker();
-	}
-
-	@Override
-	protected SubstringSequenceChecker rootThreadChecker() {
-		return new AHelloRootPostJoinChecker();
+	protected Object[][] iterationPropertyNamesAndType() {
+		return null;
 	}
 	@Override
-	protected SubstringSequenceChecker forkedThreadChecker() {
-		return new AHelloPerThreadChecker();
+	protected Object[][] postIterationPropertyNamesAndType() {
+		return GREETING_DESCRIPTOR;
 	}
-
 	@Override
-	protected double preForkPartialCredit() {
-		// TODO Auto-generated method stub
+	protected Object[][] postJoinPropertyNamesAndType() {
+		return GREETING_DESCRIPTOR;
+	}
+	@Override
+	protected int totalIterations() {
 		return 0;
 	}
+//	@Override
+//	protected PropertyBasedStringChecker preForkChecker() {
+//		return null;
+//	}
+//
+//	@Override
+//	protected PropertyBasedStringChecker postForkChecker() {
+////		return new AHelloPostForkChecker(numExpectedForkedThreads());
+//		return new AHelloPostForkPropertyChecker(numExpectedForkedThreads());	
+//
+//	}
+
+//	@Override
+//	protected PropertyBasedStringChecker postJoinChecker() {
+////		return new AHelloRootPostJoinChecker();
+//		return new AHelloPostJoinPropertyChecker();
+//
+//	}
+
+//	@Override
+//	protected SubstringSequenceChecker rootThreadChecker() {
+//		return new AHelloPerThreadChecker();
+//	}
+//	@Override
+//	protected SubstringSequenceChecker forkedThreadChecker() {
+//		return new AHelloPerThreadChecker();
+//	}
+
+//	@Override
+//	protected double preForkPartialCredit() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 	@Override
-	protected double postForkPartialCredit() {
+	protected double postForkOutputCredit() {
 		return 0.3;
 	}
 
 	@Override
-	protected double postJoinPartialCredit() {
+	protected double postJoinOutputCredit() {
 		return 0.1;
 	}
-
 	@Override
-	protected double forkedThreadPartialCredit() {
-		return 0.6;
+	protected double threadCountCredit () {
+    	return 0.6;
+    }
+	@Override
+	protected  String postIterationEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
+		String aMessage = null;
+		String aGreeting = (String) aNameValuePairs.get("Greeting");
+		if (aGreeting == null) {
+			return "Greeting property not found";
+		}
+		String aRegex = "Hello.*World.*";
+		if (!aGreeting.matches(aRegex)) {
+			return "Greeting property " + aGreeting + " does not match " + aRegex;
+		}
+		return null;
 	}
-
+	
+	// inherited methods, that can be overridden
 	@Override
-	protected double rootThreadPartialCredit() {
-		return 0;
+	protected TestCaseResult checkOutput(ResultingOutErr anOutput) {
+    	return super.checkOutput(anOutput);
+    }
+	protected  TestCaseResult checkEvents(ConcurrentPropertyChange[] anEvents) {
+		return super.checkEvents(anEvents);
+	}
+	@Override
+	public TestCaseResult test(Project project, boolean autoGrade) throws NotAutomatableException,
+			NotGradableException {
+		return super.test(project, autoGrade);
 	}
 
 }

@@ -11,20 +11,42 @@ public class HelloExecutionRandomChildren extends AbstractHelloExecution {
 	int numThreads;
 	public HelloExecutionRandomChildren() {
 	     numThreads = (int) Math.ceil(Math.random()*MAX_THREADS);
-	     if (numThreads <= 1) {
-	    	 numThreads = 2;
+	     if (numThreads <= 2) {
+	    	 numThreads = 4;
 	     }
 	}
 	protected  int numExpectedForkedThreads() {
 		return numThreads;
 	}
 	
-	@Override
-	public TestCaseResult test(Project project, boolean autoGrade) throws NotAutomatableException,
-			NotGradableException {
-		return super.test(project, autoGrade);
-	}
-	
+//	@Override
+//	public TestCaseResult test(Project project, boolean autoGrade) throws NotAutomatableException,
+//			NotGradableException {
+//		return super.test(project, autoGrade);
+//	}
+//	@Override
+//	protected Object[][] preForkPropertyNamesAndType() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	@Override
+//	protected Object[][] iterationPropertyNamesAndType() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	@Override
+//	protected Object[][] postIterationPropertyNamesAndType() {
+//		return null;
+//	}
+//	@Override
+//	protected Object[][] postJoinPropertyNamesAndType() {
+//		return null;
+//	}
+//	@Override
+//	protected int totalIterations() {
+//		return 0;
+//	}
+//	
 
 	
 

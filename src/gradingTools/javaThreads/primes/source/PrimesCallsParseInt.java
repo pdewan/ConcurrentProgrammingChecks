@@ -1,14 +1,14 @@
-package gradingTools.javaThreads.hello.source;
+package gradingTools.javaThreads.primes.source;
 
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodCalledTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.CheckstyleMethodDefinedTestCase;
 import gradingTools.basics.sharedTestCase.checkstyle.predefined.ClassCallsParseInt;
-import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
+import gradingTools.javaThreads.primes.ConcurrentPrimesSuite;
 
-public class HelloCallsParseInt extends ClassCallsParseInt {
+public class PrimesCallsParseInt extends ClassCallsParseInt {
 
-	public HelloCallsParseInt() {
-		super(ConcurrentHelloSuite.ROOT_CLASS);
+	public PrimesCallsParseInt() {
+		super(ConcurrentPrimesSuite.ROOT_CLASS);
 	}
 
 }

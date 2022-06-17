@@ -8,7 +8,7 @@ import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 //	HelloClassProvided.class,
-	HelloExecutionSingleChild.class,
+	HelloExecutionTwoChildren.class,
 	HelloExecutionRandomChildren.class
 //	HelloExectutionMultipleArgs.class,	
 
