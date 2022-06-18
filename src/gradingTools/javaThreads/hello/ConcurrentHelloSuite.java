@@ -9,7 +9,7 @@ import grader.basics.config.BasicExecutionSpecificationSelector;
 import grader.basics.junit.BasicJUnitUtils;
 import gradingTools.javaThreads.hello.execution.HelloExecutionChecks;
 import gradingTools.javaThreads.hello.source.HelloSourceChecks;
-import gradingTools.javaThreads.hello.style.ConcurrencyStyleChecks;
+import gradingTools.javaThreads.hello.style.HelloStyleChecks;
 import gradingTools.javaThreads.primes.source.PrimesSourceChecks;
 import gradingTools.shared.testcases.AssignmentSuiteSkeleton;
 import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
@@ -17,12 +17,12 @@ import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 @Suite.SuiteClasses({
 	HelloExecutionChecks.class,
 	HelloSourceChecks.class,
-	ConcurrencyStyleChecks.class
+	HelloStyleChecks.class
 	
 //	GreetingCheckstyle.class
 })
 public class ConcurrentHelloSuite extends ConcurrencySuiteSkeleton {
-		public static final String ROOT_CLASS = "Hello";
+		public static final String ROOT_CLASS = "ConcurrentHello";
 		public static final String WORKER_CLASS = "HelloWorker";
 
 		public static void main (String[] args) {
@@ -38,7 +38,7 @@ public class ConcurrentHelloSuite extends ConcurrencySuiteSkeleton {
 	}
 	static {
 		BasicExecutionSpecificationSelector.getBasicExecutionSpecification().
-		setCheckStyleConfiguration("unc_checks_concurrency_hello.xml");
+		setCheckStyleConfiguration("unc_checks_concurrency.xml");
 	}
 	
 }
