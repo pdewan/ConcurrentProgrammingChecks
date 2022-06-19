@@ -26,7 +26,7 @@ import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 //	GreetingCheckstyle.class
 })
 public class ConcurrentPrimesSuite extends ConcurrencySuiteSkeleton {
-		public static final String ROOT_CLASS = "ConcurrentPrimes";
+		public static final String ROOT_CLASS = "ConcurrentPrimeNumbers";
 		public static final String WORKER_CLASS = "PrimesWorker";
 
 		public static void main (String[] args) {

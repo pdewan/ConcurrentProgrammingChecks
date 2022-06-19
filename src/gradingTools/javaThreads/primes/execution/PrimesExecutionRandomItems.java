@@ -15,43 +15,9 @@ public class PrimesExecutionRandomItems extends AbstractPrimeExecution {
 	    	 numItems = 7;
 	     }
 	}
-	protected  int numExpectedItems() {
-		return numItems;
-	}
-	
-	@Override
-	public TestCaseResult test(Project project, boolean autoGrade) throws NotAutomatableException,
-			NotGradableException {
-		return super.test(project, autoGrade);
-	}
-	@Override
-	protected Object[][] preForkPropertyNamesAndType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	protected Object[][] iterationPropertyNamesAndType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	protected Object[][] postIterationPropertyNamesAndType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	protected Object[][] postJoinPropertyNamesAndType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	@Override
 	protected int totalIterations() {
-		// TODO Auto-generated method stub
-		return 0;
+		return numItems;
 	}
-	
-
-	
-
 	
 }

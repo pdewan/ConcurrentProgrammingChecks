@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import grader.basics.concurrency.propertyChanges.AbstractConcurrentEventSupport;
@@ -62,7 +63,10 @@ public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObser
 			{"Num Primes", Number.class},
 			
 	};
-	public static final Object[][] POST_JOIN_PROPERTIES = POST_ITERATION_PROPERTIES;
+	public static final Object[][] POST_JOIN_PROPERTIES = {
+			{"Total Num Primes", Number.class},
+			
+	};
 
 	@Override
 	protected String mainClassIdentifier() {
@@ -95,76 +99,99 @@ public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObser
 	}
 	@Override
 	protected Object[][] postJoinPropertyNamesAndType() {
-		return  POST_ITERATION_PROPERTIES;
+		return  POST_JOIN_PROPERTIES;
 	}
-//	@Override
-//	protected int numPerIterationEvents() {
-//		return PER_ITERATION_EVENTS;
-//	}
-//	protected  int numIterations() {
-//		return AbstractPrimeExecution.NUM_THREADS;
-//	}
-//	@Override
-//	protected Class mainClass() {
-//		return findClassByName(mainClassIdentifier());
-//	}
-//	@Override
-//	protected PropertyBasedStringChecker preForkChecker() {
-//		return new APrimesPreForkPropertyChecker();
-//	}
 
-//	@Override
-//	protected PropertyBasedStringChecker postForkChecker() {
-////		return new AHelloPostForkChecker(numExpectedForkedThreads());
-//		return new APrimesPostForkPropertyChecker(numExpectedItems());	
-//
-//	}
-
-//	@Override
-//	protected PropertyBasedStringChecker postJoinChecker() {
-//		return new APrimesPostJoinPropertyChecker();
-//
-//	}
-
-//	@Override
-//	protected SubstringSequenceChecker rootThreadChecker() {
-//		return new AHelloPerThreadChecker();
-//	}
-//	@Override
-//	protected SubstringSequenceChecker forkedThreadChecker() {
-//		return new AHelloPerThreadChecker();
-//	}
-
-//	@Override
-//	protected double preForkOutputCredit() {
-//		// TODO Auto-generated method stub
-//		return 0.2;
-//	}
-//
-//	@Override
-//	protected double postForkOutputCredit() {
-//		return 0.2;
-//	}
-//
-//	@Override
-//	protected double postJoinOutputCredit() {
-//		return 0.1;
-//	}
+	
+	
+	int numNumbersFoundByCurrentThread;
+	int numExpectedFinalNumbers;	
+	/**
+	 * The above methods make properties output by each thread available to
+	 * this testing code. Even though the property outputs are expected to be
+	 * interleaved, the testing framework does not interleave the execution of 
+	 * these methods, allowing the testing code to finish processing all properties
+	 * output by a thread, before it processes those output by another thread after
+	 * a thread switch. 
+	 * 
+	 * This method is called when a thread switch occurs.
+	 * The first argument indicates the thread whose properties were previously
+	 * made available, and the second one indicated those whose properties will now
+	 * be made available.
+	 * 
+	 * It should be used to reset per thread state.
+	 */
+	protected void threadEventProcessingSwitched(Thread aPreviousThread, Thread aNewThread) {
+		System.out.println ("Thread processing switched from " + aPreviousThread + " to " + aNewThread);
+		numNumbersFoundByCurrentThread = 0;
+	}
+	// return null in the following message methods if there is no error, otherwise
+    // return error message
+	
+	/**
+	 * Invoked for each property output by the root thread before it forks new
+	 * threads.
+	 */
 	@Override
 	protected  String preForkEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
+		System.out.println ("Thread:" + aThread.getId() + " prefork properties: " + aNameValuePairs);
 		return null;
 	}
+
+	/**
+	 * Invoked as each iteration of a thread is processed.
+	 * The first argument indicates the thread that processed the iteration
+	 * The second argument indicates the property names and values output on that
+	 * iteration
+	 * A failure message should be given if the values of the input and computed 
+	 * properties are not consistent
+	 * Once a failure message is given no other iteration or post iteration
+	 * methods will be called, though the post join method woud be called
+	 */
 	@Override
 	protected  String iterationEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
+		System.out.println ("Thread:" + aThread.getId() + " iteration properties: " + aNameValuePairs);
+		boolean isPrime = (boolean) aNameValuePairs.get("Is Prime");
+		int aNumber = (Integer) aNameValuePairs.get("Number");
+		if (isPrime) {
+			numNumbersFoundByCurrentThread++;
+		}
+		boolean isActualPrime = isPrime(aNumber);
+		if (isPrime != isActualPrime) {
+			return "Is Prime output as " + isPrime + " for number " + aNumber + " but should be " + isActualPrime;
+		}		
 		return null;
 	}
 	@Override
 	protected  String postIterationEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
+		System.out.println ("Thread:" + aThread.getId() + " post iteration properties: " + aNameValuePairs);
+		int aNumNumbersComputed = (int) aNameValuePairs.get("Num Primes");
+		if (aNumNumbersComputed != numNumbersFoundByCurrentThread) {
+			return "Thread " + aThread.getId() + " found " + numNumbersFoundByCurrentThread + " but computed " + aNumNumbersComputed;
+		}
+		numExpectedFinalNumbers += aNumNumbersComputed;
 		return null;
 	}
 	@Override
 	protected  String postJoinEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
+		System.out.println ("Thread:" + aThread.getId() + " post join properties: " + aNameValuePairs);
+		int aComputedFinalNumbers = (int) aNameValuePairs.get("Total Num Primes");
+		if (aComputedFinalNumbers != numExpectedFinalNumbers) {
+			return "Computed final numbers " + aComputedFinalNumbers + " != " + "expected final numbers " + numExpectedFinalNumbers;
+		}
 		return null;
+	}
+	
+	public static boolean isPrime(int num) {
+		if (num == 2)
+			return true;
+
+		for (int i = 2; i <= Math.sqrt(num); i++) {
+			if ((num % i) == 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 //	@Override
