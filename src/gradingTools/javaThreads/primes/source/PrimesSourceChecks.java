@@ -15,14 +15,17 @@ import util.annotations.Explanation;
 import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-//	HelloMainDefined.class,
-	ConcurrentClassCallsParseInt.class,
-	ConcurrentClassInstantiatesThread.class,
-	ConcurrentClassInstantiatesWorker.class,
-	ConcurrentClassCallsThreadStart.class,
-	ConcurrentClassCallsThreadJoin.class,
-	WorkerISARunnable.class,
-	WorkerCallsPrintln.class,
+	ConcurrentPrimeMainCallsPrintln.class,
+	ConcurrentPrimeMainCallsParseInt.class,
+	ConcurrentPrimeMainCallsPrintProperty.class,
+	ConcurrentPrimeInstantiatesThread.class,
+	ConcurrentPrimeCallsThreadStart.class,
+	ConcurrentPrimeMainCallsThreadStart.class,
+	ConcurrentPrimeCallsThreadJoin.class,
+	ConcurrentPrimeMainCallsThreadJoin.class,
+	ConcurrentPrimeInstantiatesWorker.class,
+	PrimeWorkerISARunnable.class,
+	PrimeWorkerRunCallsPrintProperty.class
 
 })
 @Explanation("Checks source code constraints")

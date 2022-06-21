@@ -1,4 +1,4 @@
-package gradingTools.javaThreads.oddNumbers.source;
+package gradingTools.javaThreads.pi.source;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -15,32 +15,22 @@ import util.annotations.Explanation;
 import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-//	HelloMainDefined.class,
-//	ConcurrentClassCallsParseInt.class,
-	ConcurrentOddMainCallsPrintln.class,
-	ConcurrentOddMainCallsParseInt.class,
-	ConcurrentOddMainCallsPrintProperty.class,
-	ConcurrentOddInstantiatesThread.class,
-	ConcurrentOddCallsThreadStart.class,
-	ConcurrentOddMainCallsThreadStart.class,
-	ConcurrentOddCallsThreadJoin.class,
-	ConcurrentOddMainCallsThreadJoin.class,
-//	OddMainInstantiatesThread.class,
-	ConcurrentOddInstantiatesWorker.class,
-	OddWorkerISARunnable.class,
-	OddWorkerRunCallsPrintProperty.class
-	
-//	ConcurrentClassInstantiatesThread.class,
-//	ConcurrentClassInstantiatesWorker.class,
-//	ConcurrentClassCallsThreadStart.class,
-//	ConcurrentClassCallsThreadJoin.class,
-//	WorkerISARunnable.class,
-//	WorkerCallsPrintln.class,
+	ConcurrentPIMainCallsPrintln.class,
+	ConcurrentPIMainCallsParseInt.class,
+	ConcurrentPIMainCallsPrintProperty.class,
+	ConcurrentPIInstantiatesThread.class,
+	ConcurrentPICallsThreadStart.class,
+	ConcurrentPIMainCallsThreadStart.class,
+	ConcurrentPICallsThreadJoin.class,
+	ConcurrentPIMainCallsThreadJoin.class,
+	ConcurrentPIInstantiatesWorker.class,
+	PIWorkerISARunnable.class,
+	PIWorkerRunCallsPrintProperty.class
 
 })
 @Explanation("Checks source code constraints")
 @MaxValue(10)
-public class OddNumbersSourceChecks {
+public class PISourceChecks {
 
 	
 }

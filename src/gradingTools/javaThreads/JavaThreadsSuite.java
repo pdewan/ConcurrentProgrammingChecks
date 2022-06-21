@@ -16,6 +16,7 @@ import gradingTools.javaThreads.oddNumbers.execution.OddNumbersExecutionChecks;
 import gradingTools.javaThreads.oddNumbers.source.OddNumbersSourceChecks;
 import gradingTools.javaThreads.oddNumbers.style.OddNumbersStyleChecks;
 import gradingTools.javaThreads.pi.execution.PIExecutionChecks;
+import gradingTools.javaThreads.pi.source.PISourceChecks;
 import gradingTools.javaThreads.primes.execution.PrimesExecutionChecks;
 import gradingTools.javaThreads.primes.source.PrimesSourceChecks;
 import gradingTools.javaThreads.source.JavaThreadsSourceChecks;
@@ -24,10 +25,13 @@ import gradingTools.shared.testcases.AssignmentSuiteSkeleton;
 import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	JavaThreadsSourceChecks.class,
+//	JavaThreadsSourceChecks.class,
+	OddNumbersSourceChecks.class,
 	OddNumbersExecutionChecks.class,
 	PrimesExecutionChecks.class,
+	PrimesSourceChecks.class,
 	PIExecutionChecks.class,
+	PISourceChecks.class,
 	JavaThreadsStyleChecks.class
 
 })

@@ -123,7 +123,7 @@ public abstract class AbstractOddNumbersExecution extends AbstractForkJoinOutput
 	 */
 	@Override
 	protected  String preForkEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
-		System.out.println ("Thread:" + aThread.getId() + " prefork properties: " + aNameValuePairs);
+//		System.out.println ("Thread:" + aThread.getId() + " prefork properties: " + aNameValuePairs);
 		return null;
 	}
 
@@ -139,7 +139,7 @@ public abstract class AbstractOddNumbersExecution extends AbstractForkJoinOutput
 	 */
 	@Override
 	protected  String iterationEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
-		System.out.println ("Thread:" + aThread.getId() + " iteration properties: " + aNameValuePairs);
+//		System.out.println ("Thread:" + aThread.getId() + " iteration properties: " + aNameValuePairs);
 		boolean isOdd = (boolean) aNameValuePairs.get("Is Odd");
 		int aNumber = (Integer) aNameValuePairs.get("Number");
 		if (isOdd) {
@@ -170,7 +170,7 @@ public abstract class AbstractOddNumbersExecution extends AbstractForkJoinOutput
 	 */
 	@Override
 	protected  String postIterationEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
-		System.out.println ("Thread:" + aThread.getId() + " post iteration properties: " + aNameValuePairs);
+//		System.out.println ("Thread:" + aThread.getId() + " post iteration properties: " + aNameValuePairs);
 		int aNumNumbersComputed = (int) aNameValuePairs.get("Num Odd Numbers");
 		if (aNumNumbersComputed != numNumbersFoundByCurrentThread) {
 			return "Thread " + aThread.getId() + " found " + numNumbersFoundByCurrentThread + " but computed " + aNumNumbersComputed;
@@ -186,7 +186,7 @@ public abstract class AbstractOddNumbersExecution extends AbstractForkJoinOutput
 	 */
 	@Override
 	protected  String postJoinEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
-		System.out.println ("Thread:" + aThread.getId() + " post join properties: " + aNameValuePairs);
+//		System.out.println ("Thread:" + aThread.getId() + " post join properties: " + aNameValuePairs);
 		int aComputedFinalNumbers = (int) aNameValuePairs.get("Total Num Odd Numbers");
 		if (aComputedFinalNumbers != numExpectedFinalNumbers) {
 			return "Computed final number of odd numbers " + aComputedFinalNumbers + " != " + "expected final numbers " + numExpectedFinalNumbers;
