@@ -46,11 +46,9 @@ import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
 public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObserver {
-//	public static final String CONCURRENT_HELLO_CLASS_NAME = "Hello";
 	
 	public static final int NUM_THREADS = 4;
-//	public static final int PER_ITERATION_EVENTS = 3;
-//	public static final int POST_ITERATION_EVENTS = 1;
+
 	public static final Object[][] PRE_FORK_PROPERTIES = {
 			{"Random Numbers", Array.class}			
 	};
@@ -101,8 +99,6 @@ public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObser
 	protected Object[][] postJoinPropertyNamesAndType() {
 		return  POST_JOIN_PROPERTIES;
 	}
-
-	
 	
 	int numNumbersFoundByCurrentThread;
 	int numExpectedFinalNumbers;	
@@ -137,7 +133,7 @@ public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObser
 		System.out.println ("Thread:" + aThread.getId() + " prefork properties: " + aNameValuePairs);
 		return null;
 	}
-
+	
 	/**
 	 * Invoked as each iteration of a thread is processed.
 	 * The first argument indicates the thread that processed the iteration
@@ -194,16 +190,6 @@ public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObser
 		return true;
 	}
 
-//	@Override
-//	protected double forkedThreadPartialCredit() {
-//		return 0.6;
-//	}
-//
-//	@Override
-//	protected double rootThreadPartialCredit() {
-//		return 0;
-//	}
-	
 	// inherited methods, that can be overridden
 	@Override
 	protected TestCaseResult checkOutput(ResultingOutErr anOutput) {

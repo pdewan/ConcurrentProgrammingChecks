@@ -61,7 +61,7 @@ public abstract class AbstractHelloExecution extends AbstractForkJoinOutputObser
 	}
 	
 	protected Class mainClass() {
-		return findClassByName(mainClassIdentifier());
+		return findClassByName(null, mainClassIdentifier());
 	}
 	@Override
 	protected Object[][] preForkPropertyNamesAndType() {

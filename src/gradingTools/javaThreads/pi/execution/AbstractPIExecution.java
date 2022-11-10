@@ -47,11 +47,9 @@ import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
 public abstract class AbstractPIExecution extends AbstractForkJoinOutputObserver {
-//	public static final String CONCURRENT_HELLO_CLASS_NAME = "Hello";
 	
 	public static final int NUM_THREADS = 4;
-//	public static final int PER_ITERATION_EVENTS = 3;
-//	public static final int POST_ITERATION_EVENTS = 1;
+
 	public static final Object[][] PRE_FORK_PROPERTIES = {
 			{"Total Iterations", Integer.class}			
 	};
@@ -103,8 +101,6 @@ public abstract class AbstractPIExecution extends AbstractForkJoinOutputObserver
 	protected Object[][] postJoinPropertyNamesAndType() {
 		return  POST_JOIN_PROPERTIES;
 	}
-
-	
 	
 	int numNumbersFoundByCurrentThread;
 	int numExpectedFinalNumbers;	
@@ -195,18 +191,8 @@ public abstract class AbstractPIExecution extends AbstractForkJoinOutputObserver
 		}
 		return null;
 	}
-	
 
 
-//	@Override
-//	protected double forkedThreadPartialCredit() {
-//		return 0.6;
-//	}
-//
-//	@Override
-//	protected double rootThreadPartialCredit() {
-//		return 0;
-//	}
 	
 	// inherited methods, that can be overridden
 	@Override
