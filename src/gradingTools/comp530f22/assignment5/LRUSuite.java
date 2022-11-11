@@ -16,8 +16,10 @@ import grader.basics.junit.BasicJUnitUtils;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-
-	LRUTest.class,
+	LRUOutput.class,
+	BlockOnConditionVariables.class,
+	ReleaseConditionWaiters.class,
+	BroadcastVsSignal.class
 	
 	
 })
@@ -37,25 +39,20 @@ public class LRUSuite {
 		}
 	}
 	static {
-//		sBasicProjectIntrospection.setCheckAllSpecifiedTags(true);
-//		BasicStaticConfigurationUtils.setUseProjectConfiguration(true);
+
 		BasicExecutionSpecificationSelector.getBasicExecutionSpecification().setEchoOutput(false);
-//		BasicRunningProject.setEchoOutput(false);
+    	 BasicExecutionSpecificationSelector.getBasicExecutionSpecification().setProcessOutputSleepTime(1);
+
 
 		BasicExecutionSpecificationSelector.getBasicExecutionSpecification().setLanguage("C");
-//		ExecutableFinderSelector.setMainClassFinder(new AnExecutableFinder());
-//		BasicLanguageDependencyManager.se
-//		ExecutableFinderSelector.setMainClassFinder(new AValgrindMakeCommandGenerator());
+
 		BasicLanguageDependencyManager.setMainClassFinder(new AValgrindMakeCommandGenerator());
 
-//		setValgrindConfigurationDirectory(newVal);
 		BasicExecutionSpecificationSelector.getBasicExecutionSpecification()
-//		.setValgrindConfiguration("BoundedBufferConfig");
 		.setValgrindConfiguration("MutexLruConfig");
 		String[] aCommand = new String[]{"./lru-mutex-wrapped", "-c", "2"};
 		List<String> aCommandList = Arrays.asList(aCommand);
 		BasicExecutionSpecificationSelector.getBasicExecutionSpecification()
-//		.setValgrindConfiguration("BoundedBufferConfig");
 		.setGraderBasicCommand(aCommandList);
 
 

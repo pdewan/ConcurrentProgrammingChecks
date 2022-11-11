@@ -15,15 +15,15 @@ import grader.basics.project.Project;
 import grader.basics.testcase.PassFailJUnitTestCase;
 import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
-import valgrindpp.grader.Trace;
+import valgrindpp.grader.ValgrindTrace;
 @MaxValue(100)
 public class HasTraces extends PassFailJUnitTestCase {
 	List<String> outputs ;
-	List<Trace> traces;
+	List<ValgrindTrace> traces;
 	public List<String> getOutputs() {
 		return outputs;
 	}
-	public List<Trace> getTraces() {
+	public List<ValgrindTrace> getTraces() {
 		return traces;
 	}
 	@Override
@@ -37,7 +37,7 @@ public class HasTraces extends PassFailJUnitTestCase {
 		outputs = new ArrayList();
 		for (String aLine: aMainLines) {
 			try {
-				traces.add(new Trace(aLine));
+				traces.add(new ValgrindTrace(aLine));
 			} catch (Exception e) {
 				outputs.add(aLine);
 				// TODO Auto-generated catch block
@@ -70,7 +70,7 @@ public class HasTraces extends PassFailJUnitTestCase {
 		Set<String> seen = new HashSet<String>(), inits = new HashSet<String>();
 		boolean called = false;
 		
-		for(Trace trace: traces) {
+		for(ValgrindTrace trace: traces) {
 			if(trace.fnname.equals("pthread_cond_init")) {
 				seen.add(trace.arguments[0]);
 				inits.add(trace.arguments[0]);
@@ -88,7 +88,7 @@ public class HasTraces extends PassFailJUnitTestCase {
 private boolean releaseConditionedWaiters() {
 		
 		Set<String> waiters = new HashSet<String>(), seen = new HashSet<String>();
-		for(Trace trace: traces) {
+		for(ValgrindTrace trace: traces) {
 			if(trace.fnname.equals("pthread_cond_wait")) {				
 				if(!seen.contains(trace.arguments[0])) 
 						waiters.add(trace.arguments[0]);
@@ -107,7 +107,7 @@ private boolean broadcastVsSignal() {
 	
 	Map<Long, Boolean> threadState = new HashMap<Long, Boolean>();
 	
-	for(Trace trace: traces) {
+	for(ValgrindTrace trace: traces) {
 		switch(trace.fnname) {
 		case "clean": 
 			Boolean calledSignal = threadState.get(trace.thread);
