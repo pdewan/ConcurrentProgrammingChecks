@@ -16,6 +16,7 @@ import grader.basics.junit.BasicJUnitUtils;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	LRUSource.class,
 	LRUOutput.class,
 	BlockOnConditionVariables.class,
 	ReleaseConditionWaiters.class,

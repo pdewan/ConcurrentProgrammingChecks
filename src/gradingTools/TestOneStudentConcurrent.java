@@ -4,9 +4,10 @@ import grader.basics.config.BasicExecutionSpecificationSelector;
 
 public class TestOneStudentConcurrent {
 	static final String FOLDER = "D:\\dewan_backup\\C\\ValgrindExamples\\Assignment5";
-
+//	static final String FOLDER = "D:\\dewan_backup\\C\\ValgrindExamples\\Assignment5-Gradescope";
 //	static final String STUDENT = "sdgeorge";
 	static final String STUDENT = "acorrect";
+//	static final String STUDENT = "student";
 	static final String COURSE = "Comp530F22";
 	static final String ASSIGNMENT = "Assignment5";
 	
