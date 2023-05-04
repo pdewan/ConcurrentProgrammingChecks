@@ -16,7 +16,7 @@ import grader.basics.junit.BasicJUnitUtils;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	LRUSource.class,
+//	LRUSource.class,
 	LRUOutput.class,
 	BlockOnConditionVariables.class,
 	ReleaseConditionWaiters.class,
@@ -24,7 +24,7 @@ import grader.basics.junit.BasicJUnitUtils;
 	
 	
 })
-public class LRUSuite {
+public class Assignment5Suite {
 	public static void main (String[] args) {
 		try {
 //			setProcessTimeOut(25);
@@ -32,7 +32,7 @@ public class LRUSuite {
 //			BasicStaticConfigurationUtils.setModule("Comp524");
 //			BasicStaticConfigurationUtils.setProblem("Assignment1");
 //			BasicStaticConfigurationUtils.setModuleProblemAndTest(Assignment1Suite.class);
-			BasicJUnitUtils.interactiveTest(LRUSuite.class);
+			BasicJUnitUtils.interactiveTest(Assignment5Suite.class);
 
 
 		} catch (Exception e) {

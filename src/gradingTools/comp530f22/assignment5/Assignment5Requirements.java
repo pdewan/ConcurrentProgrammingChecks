@@ -15,7 +15,7 @@ public class Assignment5Requirements extends AJUnitProjectRequirements {
 		addDueDate("12/08/2021 01:00:00", 0.8);
 		addDueDate("12/10/2022 01:00:00", 0.5);
 		
-		addJUnitTestSuite(LRUSuite.class);
+		addJUnitTestSuite(Assignment5Suite.class);
 		
      	
 

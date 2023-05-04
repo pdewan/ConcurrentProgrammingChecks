@@ -30,9 +30,10 @@ public class LRUSource extends PassFailJUnitTestCase {
 	@Override
 	public TestCaseResult test(Project project, boolean autoGrade)
 			throws NotAutomatableException, NotGradableException {
-		String aVersion1 = ASourceAndTestLogWriter.getInstance().replayToSessioString(119);
-		System.out.println("Version 1");
-		System.out.println(aVersion1);
+		List<String[]> aSessions = ASourceAndTestLogWriter.getInstance().readAllSessions();
+//		String aVersion1 = ASourceAndTestLogWriter.getInstance().replayToSessioString(119);
+//		System.out.println("Version 1");
+//		System.out.println(aVersion1);
 //		String aVersion2 = ASourceAndTestLogWriter.getInstance().replayToSessioString(110);
 //		System.out.println("Version 2");
 //		System.out.println(aVersion2);
@@ -48,7 +49,7 @@ public class LRUSource extends PassFailJUnitTestCase {
 //		String aSource = project.getSource();
 //		System.out.println(" Source\n:" + aSource);
 //		project.getTextManager().initializeAllSourcesText();
-		JSONObject jsonObject;
+//		JSONObject jsonObject;
 		
 //		String aSecondSource = project.getSource();
 //		if (!aSource.equals(aSecondSource)) {
