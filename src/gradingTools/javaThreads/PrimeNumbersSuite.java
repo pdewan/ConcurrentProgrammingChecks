@@ -17,8 +17,8 @@ import gradingTools.javaThreads.oddNumbers.source.OddNumbersSourceChecks;
 import gradingTools.javaThreads.oddNumbers.style.OddNumbersStyleChecks;
 import gradingTools.javaThreads.pi.execution.PIExecutionChecks;
 import gradingTools.javaThreads.pi.source.PISourceChecks;
-import gradingTools.javaThreads.primes.execution.ExtendedPrimesExecutionFixedItems;
-import gradingTools.javaThreads.primes.execution.ExtendedPrimesPerformanceChecker;
+import gradingTools.javaThreads.primes.execution.PrimesFunctionality;
+import gradingTools.javaThreads.primes.execution.PrimesPerformance;
 import gradingTools.javaThreads.primes.execution.PrimesExecutionChecks;
 import gradingTools.javaThreads.primes.source.PrimesSourceChecks;
 import gradingTools.javaThreads.source.JavaThreadsSourceChecks;
@@ -27,13 +27,13 @@ import gradingTools.shared.testcases.AssignmentSuiteSkeleton;
 import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	ExtendedPrimesExecutionFixedItems.class,
-	ExtendedPrimesPerformanceChecker.class
+	PrimesFunctionality.class,
+	PrimesPerformance.class
 	
 
 
 })
-public class ExtendedJavaThreadsSuite extends ConcurrencySuiteSkeleton {
+public class PrimeNumbersSuite extends ConcurrencySuiteSkeleton {
 //		public static final String ROOT_CLASS = "ConcurrentOddNumbers";
 //		public static final String WORKER_CLASS = "OddNumbersWorker";
 
@@ -41,7 +41,7 @@ public class ExtendedJavaThreadsSuite extends ConcurrencySuiteSkeleton {
 		try {
 
 			processArgs(args);
-			BasicJUnitUtils.interactiveTest(ExtendedJavaThreadsSuite.class);
+			BasicJUnitUtils.interactiveTest(PrimeNumbersSuite.class);
 
 
 		} catch (Exception e) {

@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 import gradingTools.javaThreads.oddNumbers.ConcurrentOddNumbersSuite;
-import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinOutputObserver;
+import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinChecker;
 import util.annotations.MaxValue;
 
 @MaxValue(2)
-public abstract class AbstractOddNumbersExecution extends AbstractForkJoinOutputObserver {
+public abstract class AbstractOddNumbersExecution extends AbstractForkJoinChecker {
 
 	// The testing code needs to know what main class to call,
 	// what arguments to pass to it, and how many forked threads are expected
@@ -99,7 +99,7 @@ public abstract class AbstractOddNumbersExecution extends AbstractForkJoinOutput
 	 * It should be used to reset per thread state.
 	 */
 	protected void threadEventProcessingSwitched(Thread aPreviousThread, Thread aNewThread) {
-		System.out.println("Thread processing switched from " + aPreviousThread + " to " + aNewThread);
+//		System.out.println("Thread processing switched from " + aPreviousThread + " to " + aNewThread);
 		numNumbersFoundByCurrentThread = 0;
 	}
 

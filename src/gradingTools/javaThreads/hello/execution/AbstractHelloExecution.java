@@ -32,7 +32,7 @@ import grader.basics.project.Project;
 import grader.basics.testcase.PassFailJUnitTestCase;
 import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
-import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinOutputObserver;
+import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinChecker;
 import gradingTools.shared.testcases.greeting.AGreetingChecker;
 import gradingTools.shared.testcases.greeting.GreetingMainProvided;
 import gradingTools.shared.testcases.utils.ALinesMatcher;
@@ -42,7 +42,7 @@ import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
-public abstract class AbstractHelloExecution extends AbstractForkJoinOutputObserver {
+public abstract class AbstractHelloExecution extends AbstractForkJoinChecker {
 //	public static final String CONCURRENT_HELLO_CLASS_NAME = "Hello";
 	public static final Object[][] GREETING_DESCRIPTOR = {
 			{"Greeting", String.class}

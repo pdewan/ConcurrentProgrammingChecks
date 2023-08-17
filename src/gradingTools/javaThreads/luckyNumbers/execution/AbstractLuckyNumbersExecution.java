@@ -38,7 +38,7 @@ import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
 import gradingTools.javaThreads.luckyNumbers.ConcurrentLuckyNumbersSuite;
 import gradingTools.javaThreads.primes.ConcurrentPrimesSuite;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
-import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinOutputObserver;
+import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinChecker;
 import gradingTools.shared.testcases.greeting.AGreetingChecker;
 import gradingTools.shared.testcases.greeting.GreetingMainProvided;
 import gradingTools.shared.testcases.utils.ALinesMatcher;
@@ -48,7 +48,7 @@ import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
-public abstract class AbstractLuckyNumbersExecution extends AbstractForkJoinOutputObserver {
+public abstract class AbstractLuckyNumbersExecution extends AbstractForkJoinChecker {
 
 	// The testing code needs to know what main class to call,
 	// what arguments to pass to it, and how many forked threads are expected

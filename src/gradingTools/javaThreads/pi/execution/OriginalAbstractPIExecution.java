@@ -1,49 +1,80 @@
 package gradingTools.javaThreads.pi.execution;
+
+import java.beans.PropertyChangeEvent;
+import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import grader.basics.concurrency.propertyChanges.AbstractConcurrentEventSupport;
+import grader.basics.concurrency.propertyChanges.BasicConcurrentPropertyChangeSupport;
+import grader.basics.concurrency.propertyChanges.ConcurrentEvent;
+import grader.basics.concurrency.propertyChanges.ConcurrentEventUtility;
 import grader.basics.concurrency.propertyChanges.ConcurrentPropertyChange;
+import grader.basics.concurrency.propertyChanges.ConcurrentPropertyChangeSupport;
+import grader.basics.config.BasicExecutionSpecificationSelector;
+import grader.basics.execution.BasicProjectExecution;
+import grader.basics.execution.NotRunnableException;
 import grader.basics.execution.ResultingOutErr;
+import grader.basics.execution.RunningProject;
+import grader.basics.junit.JUnitTestsEnvironment;
 import grader.basics.junit.NotAutomatableException;
 import grader.basics.junit.TestCaseResult;
+import grader.basics.output.observer.BasicNegativeOutputSelector;
+import grader.basics.output.observer.BasicPositiveOutputSelector;
+import grader.basics.output.observer.BasicPrintStreamListener;
+import grader.basics.output.observer.ObservablePrintStream;
+import grader.basics.output.observer.ObservablePrintStreamFactory;
+import grader.basics.output.observer.PropertyBasedStringChecker;
 import grader.basics.project.NotGradableException;
 import grader.basics.project.Project;
+import grader.basics.testcase.PassFailJUnitTestCase;
+import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
 import gradingTools.javaThreads.pi.ConcurrentPISuite;
+import gradingTools.javaThreads.primes.ConcurrentPrimesSuite;
+import gradingTools.shared.testcases.SubstringSequenceChecker;
 import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinChecker;
+import gradingTools.shared.testcases.greeting.AGreetingChecker;
+import gradingTools.shared.testcases.greeting.GreetingMainProvided;
+import gradingTools.shared.testcases.utils.ALinesMatcher;
+import gradingTools.shared.testcases.utils.LinesMatchKind;
+import gradingTools.shared.testcases.utils.LinesMatcher;
+import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
+import util.models.PropertyListenerRegisterer;
 @MaxValue(2)
-public abstract class AbstractPIExecution extends AbstractForkJoinChecker {	
-	static final int NUM_THREADS = 4;
-	public static final String TOTAL_ITERATIONS = "Total Iterations";
-	public static final String ITERATION_NUM = "Iteration Num";
-	public static final String X = "X";
-	public static final String Y = "Y";
-	public static final String IN_CIRCLE = "In Circle";
-	public static final String NUM_IN_CIRCLE = "Num In Circle";
-	public static final String TOTAL_IN_CIRCLE = "Total In Circle";
-	public static final String PI = "PI";
+public abstract class OriginalAbstractPIExecution extends AbstractForkJoinChecker {
 	
+	static final int NUM_THREADS = 4;
 	static final Object[][] PRE_FORK_PROPERTIES = {
-			{TOTAL_ITERATIONS, Integer.class}			
+			{"Total Iterations", Integer.class}			
 	};
 	static final Object[][] ITERATION_PROPERTIES = {
-			{ITERATION_NUM, Number.class},
-			{X, Double.class},
-			{Y, Double.class},
-			{IN_CIRCLE, Boolean.class}
+			{"Iteration Num", Number.class},
+			{"X", Double.class},
+			{"Y", Double.class},
+			{"In Circle", Boolean.class}
 	};
 	static final Object[][] POST_ITERATION_PROPERTIES = {
-			{NUM_IN_CIRCLE, Integer.class},			
+			{"Num In Circle", Integer.class},
+			
 	};
 	static final Object[][] POST_JOIN_PROPERTIES = {
-			{TOTAL_IN_CIRCLE, Integer.class},
-			{PI, Double.class}
+			{"Total In Circle", Integer.class},
+			{"PI", Double.class}
 	};
 	@Override
 	protected String mainClassIdentifier() {
 		return ConcurrentPISuite.ROOT_CLASS;
 	}
+	protected String[] args = {"1"};
 	@Override
 	protected String[] args() {
-		return new String[] {Integer.toString( totalIterations())};
+		args[0] = Integer.toString( totalIterations());
+		return args;
 	}
 	@Override
 	protected  int numExpectedForkedThreads() {
@@ -53,10 +84,12 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 	protected Object[][] preForkPropertyNamesAndType() {
 		return PRE_FORK_PROPERTIES;
 	}
+
 	@Override
 	protected Object[][] iterationPropertyNamesAndType() {
 		return ITERATION_PROPERTIES;
 	}
+
 	@Override
 	protected Object[][] postIterationPropertyNamesAndType() {
 		return POST_ITERATION_PROPERTIES;
@@ -64,7 +97,8 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 	@Override
 	protected Object[][] postJoinPropertyNamesAndType() {
 		return  POST_JOIN_PROPERTIES;
-	}	
+	}
+	
 	int numNumbersFoundByCurrentThread;
 	int numExpectedFinalNumbers;	
 	int totalIterations;
@@ -96,9 +130,10 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 	 */
 	@Override
 	protected  String preForkEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
-		totalIterations = (int) aNameValuePairs.get(TOTAL_ITERATIONS);
+		totalIterations = (int) aNameValuePairs.get("Total Iterations");
 		return null;
 	}
+
 	/**
 	 * Invoked as each iteration of a thread is processed.
 	 * The first argument indicates the thread that processed the iteration
@@ -112,9 +147,9 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 	@Override
 	protected  String iterationEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
 //		System.out.println ("Thread:" + aThread.getId() + " iteration properties: " + aNameValuePairs);
-		double x = (double) aNameValuePairs.get(X);
-		double y = (double) aNameValuePairs.get(Y);
-		boolean inCircle = (boolean) aNameValuePairs.get(IN_CIRCLE);
+		double x = (double) aNameValuePairs.get("X");
+		double y = (double) aNameValuePairs.get("Y");
+		boolean inCircle = (boolean) aNameValuePairs.get("In Circle");
 		if (inCircle) {
 			numNumbersFoundByCurrentThread++;
 		}
@@ -130,7 +165,7 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 //			System.out.println("Unxpected root thread");
 //			return null;
 //		}
-		int aNumNumbersComputed = (int) aNameValuePairs.get(NUM_IN_CIRCLE);
+		int aNumNumbersComputed = (int) aNameValuePairs.get("Num In Circle");
 		if (aNumNumbersComputed != numNumbersFoundByCurrentThread) {
 			return "Thread " + aThread.getId() + " found " + numNumbersFoundByCurrentThread + " but computed " + aNumNumbersComputed;
 		}
@@ -139,7 +174,7 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 	}
 	@Override
 	protected  String postJoinEventsMessage(Thread aThread, Map<String, Object> aNameValuePairs) {
-		int aComputedFinalNumbers = (int) aNameValuePairs.get(TOTAL_IN_CIRCLE);
+		int aComputedFinalNumbers = (int) aNameValuePairs.get("Total In Circle");
 		if (aComputedFinalNumbers != numExpectedFinalNumbers) {
 			return "Computed final numbers " + aComputedFinalNumbers + " != " + "expected final numbers " + numExpectedFinalNumbers;
 		}
@@ -149,7 +184,10 @@ public abstract class AbstractPIExecution extends AbstractForkJoinChecker {
 			return "Computed PI " + aComputedPI + " != " + "expected PI " + anExpectedPI;
 		}
 		return null;
-	}	
+	}
+
+
+	
 	// inherited methods, that can be overridden
 	@Override
 	protected TestCaseResult checkOutput(ResultingOutErr anOutput) {

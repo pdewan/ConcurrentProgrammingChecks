@@ -35,7 +35,7 @@ import grader.basics.testcase.PassFailJUnitTestCase;
 import gradingTools.javaThreads.hello.ConcurrentHelloSuite;
 import gradingTools.javaThreads.primes.ConcurrentPrimesSuite;
 import gradingTools.shared.testcases.SubstringSequenceChecker;
-import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinOutputObserver;
+import gradingTools.shared.testcases.concurrency.outputObserver.AbstractForkJoinChecker;
 import gradingTools.shared.testcases.greeting.AGreetingChecker;
 import gradingTools.shared.testcases.greeting.GreetingMainProvided;
 import gradingTools.shared.testcases.utils.ALinesMatcher;
@@ -44,33 +44,31 @@ import gradingTools.shared.testcases.utils.LinesMatcher;
 import gradingTools.utils.RunningProjectUtils;
 import util.annotations.MaxValue;
 import util.models.PropertyListenerRegisterer;
+// 2 lines, single-user grading
 @MaxValue(2)
-public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObserver {
-	
+public abstract class AbstractPrimeExecution extends AbstractForkJoinChecker {
+	// 1 line concurrency
 	public static final int NUM_THREADS = 4;
-
+	// 3 lines single-thead checking
 	public static final Object[][] PRE_FORK_PROPERTIES = {
 			{"Random Numbers", Array.class}			
 	};
+	// 4 lines incremental checking
 	public static final Object[][] ITERATION_PROPERTIES = {
 			{"Index", Number.class},
 			{"Number", Number.class},
 			{"Is Prime", Boolean.class}
 	};
+	
 	public static final Object[][] POST_ITERATION_PROPERTIES = {
-			{"Num Primes", Number.class},
-			
+			{"Num Primes", Number.class},			
 	};
 	public static final Object[][] POST_JOIN_PROPERTIES = {
 			{"Total Num Primes", Number.class},
 			
 	};
 
-	@Override
-	protected String mainClassIdentifier() {
-		return ConcurrentPrimesSuite.ROOT_CLASS;
-
-	}
+	
 	protected String[] args = {"1"};
 	@Override
 	protected String[] args() {
@@ -189,7 +187,10 @@ public abstract class AbstractPrimeExecution extends AbstractForkJoinOutputObser
 		}
 		return true;
 	}
-
+	@Override
+	protected String mainClassIdentifier() {
+		return ConcurrentPrimesSuite.ROOT_CLASS;
+	}
 	// inherited methods, that can be overridden
 	@Override
 	protected TestCaseResult checkOutput(ResultingOutErr anOutput) {
