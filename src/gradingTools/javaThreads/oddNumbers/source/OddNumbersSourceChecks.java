@@ -17,9 +17,9 @@ import util.annotations.MaxValue;
 @Suite.SuiteClasses({
 //	HelloMainDefined.class,
 //	ConcurrentClassCallsParseInt.class,
-	ConcurrentOddMainCallsPrintln.class,
-	ConcurrentOddMainCallsParseInt.class,
-	ConcurrentOddMainCallsPrintProperty.class,
+//	ConcurrentOddMainCallsPrintln.class,
+//	ConcurrentOddMainCallsParseInt.class,
+//	ConcurrentOddMainCallsPrintProperty.class,
 	ConcurrentOddInstantiatesThread.class,
 	ConcurrentOddCallsThreadStart.class,
 	ConcurrentOddMainCallsThreadStart.class,
@@ -28,7 +28,17 @@ import util.annotations.MaxValue;
 //	OddMainInstantiatesThread.class,
 	ConcurrentOddInstantiatesWorker.class,
 	OddWorkerISARunnable.class,
-	OddWorkerRunCallsPrintProperty.class
+	AddOddNumberCallsSleep.class,
+	FillOddNumbersSubsetCallsSleep.class,
+	CreateAndStartThreadsCallsSleep.class,
+	FillOddNumberCallsSerialVersion.class,
+	FillOddNumberCallsConcurrentVersion.class,
+	ThreadProblemSizeCallsFairVerson.class,
+	ThreadProblemSizeCallsUnfairVerson.class,
+	
+
+	
+//	OddWorkerRunCallsPrintProperty.class
 	
 //	ConcurrentClassInstantiatesThread.class,
 //	ConcurrentClassInstantiatesWorker.class,
@@ -39,7 +49,7 @@ import util.annotations.MaxValue;
 
 })
 @Explanation("Checks source code constraints")
-@MaxValue(10)
+@MaxValue(2)
 public class OddNumbersSourceChecks {
 
 	

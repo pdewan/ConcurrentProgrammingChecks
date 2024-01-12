@@ -32,7 +32,10 @@ import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 })
 public class ConcurrentOddNumbersSuite extends ConcurrencySuiteSkeleton {
 		public static final String ROOT_CLASS = "ConcurrentOddNumbers";
-		public static final String WORKER_CLASS = "OddNumbersWorker";
+		public static final String DISPATCHER_CLASS = "OddNumbersDispatcher";
+
+//		public static final String WORKER_CLASS = "OddNumbersWorke";
+		public static final String WORKER_CLASS = "OddNumbersWorkerCode";
 
 		public static void main (String[] args) {
 		try {

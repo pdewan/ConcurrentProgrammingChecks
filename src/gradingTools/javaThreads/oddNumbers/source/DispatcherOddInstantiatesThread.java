@@ -5,8 +5,10 @@ import gradingTools.basics.sharedTestCase.checkstyle.predefined.ClassCallsParseI
 import gradingTools.basics.sharedTestCase.checkstyle.predefined.RootClassInstantiatesThread;
 import gradingTools.javaThreads.oddNumbers.ConcurrentOddNumbersSuite;
 
-public class ConcurrentOddInstantiatesThread extends RootClassInstantiatesThread {
-	public ConcurrentOddInstantiatesThread() {
+public class DispatcherOddInstantiatesThread extends RootClassInstantiatesThread {
+	public DispatcherOddInstantiatesThread() {
 		super(ConcurrentOddNumbersSuite.ROOT_CLASS);
-	}	
+
+	}
+	
 }

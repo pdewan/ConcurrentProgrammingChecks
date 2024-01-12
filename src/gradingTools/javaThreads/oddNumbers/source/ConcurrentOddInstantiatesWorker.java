@@ -8,7 +8,7 @@ import gradingTools.javaThreads.oddNumbers.ConcurrentOddNumbersSuite;
 
 public class ConcurrentOddInstantiatesWorker extends CheckstyleClassInstantiatedTestCase {
 	public ConcurrentOddInstantiatesWorker() {
-		super(ConcurrentOddNumbersSuite.ROOT_CLASS, ".*Worker");
+		super(ConcurrentOddNumbersSuite.ROOT_CLASS, ".*Worker.*");
 
 	}
 	

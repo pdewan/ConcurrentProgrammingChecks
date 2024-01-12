@@ -15,9 +15,9 @@ import util.annotations.Explanation;
 import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	ConcurrentPrimeMainCallsPrintln.class,
-	ConcurrentPrimeMainCallsParseInt.class,
-	ConcurrentPrimeMainCallsPrintProperty.class,
+//	ConcurrentPrimeMainCallsPrintln.class,
+//	ConcurrentPrimeMainCallsParseInt.class,
+//	ConcurrentPrimeMainCallsPrintProperty.class,
 	ConcurrentPrimeInstantiatesThread.class,
 	ConcurrentPrimeCallsThreadStart.class,
 	ConcurrentPrimeMainCallsThreadStart.class,
@@ -25,11 +25,11 @@ import util.annotations.MaxValue;
 	ConcurrentPrimeMainCallsThreadJoin.class,
 	ConcurrentPrimeInstantiatesWorker.class,
 	PrimeWorkerISARunnable.class,
-	PrimeWorkerRunCallsPrintProperty.class
+//	PrimeWorkerRunCallsPrintProperty.class
 
 })
 @Explanation("Checks source code constraints")
-@MaxValue(10)
+@MaxValue(2)
 public class PrimesSourceChecks {
 
 	

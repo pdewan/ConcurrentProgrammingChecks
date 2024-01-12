@@ -12,12 +12,13 @@ import gradingTools.basics.sharedTestCase.checkstyle.forkJoin.WorkerCallsPrintln
 import gradingTools.basics.sharedTestCase.checkstyle.forkJoin.WorkerISARunnable;
 import gradingTools.javaThreads.hello.execution.extra.HelloMainDefined;
 import util.annotations.Explanation;
+import util.annotations.IsExtra;
 import util.annotations.MaxValue;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	ConcurrentPIMainCallsPrintln.class,
-	ConcurrentPIMainCallsParseInt.class,
-	ConcurrentPIMainCallsPrintProperty.class,
+//	ConcurrentPIMainCallsPrintln.class,
+//	ConcurrentPIMainCallsParseInt.class,
+//	ConcurrentPIMainCallsPrintProperty.class,
 	ConcurrentPIInstantiatesThread.class,
 	ConcurrentPICallsThreadStart.class,
 	ConcurrentPIMainCallsThreadStart.class,
@@ -25,11 +26,12 @@ import util.annotations.MaxValue;
 	ConcurrentPIMainCallsThreadJoin.class,
 	ConcurrentPIInstantiatesWorker.class,
 	PIWorkerISARunnable.class,
-	PIWorkerRunCallsPrintProperty.class
+//	PIWorkerRunCallsPrintProperty.class
 
 })
 @Explanation("Checks source code constraints")
-@MaxValue(10)
+@MaxValue(2)
+@IsExtra(true)
 public class PISourceChecks {
 
 	

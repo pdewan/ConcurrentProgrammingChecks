@@ -1,7 +1,7 @@
 package gradingTools.javaThreads.primes.execution;
 
 import util.annotations.MaxValue;
-@MaxValue(10)
+@MaxValue(5)
 public class PrimesExecutionFixedItems extends AbstractPrimeExecution {
 	
 

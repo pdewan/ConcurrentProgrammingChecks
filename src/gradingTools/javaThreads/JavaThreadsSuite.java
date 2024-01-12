@@ -28,10 +28,10 @@ import gradingTools.shared.testcases.ConcurrencySuiteSkeleton;
 //	JavaThreadsSourceChecks.class,
 	OddNumbersSourceChecks.class,
 	OddNumbersExecutionChecks.class,
-	PrimesExecutionChecks.class,
 	PrimesSourceChecks.class,
-	PIExecutionChecks.class,
+	PrimesExecutionChecks.class,
 	PISourceChecks.class,
+	PIExecutionChecks.class,
 	JavaThreadsStyleChecks.class
 
 })
