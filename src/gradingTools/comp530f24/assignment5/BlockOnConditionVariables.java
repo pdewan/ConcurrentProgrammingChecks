@@ -1,4 +1,4 @@
-package gradingTools.comp530f22.assignment5;
+package gradingTools.comp530f24.assignment5;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class BlockOnConditionVariables extends PassFailJUnitTestCase {
 	public TestCaseResult test(Project project, boolean autoGrade)
 			throws NotAutomatableException, NotGradableException {
 
-		
+		System.out.println("Running Block on Conditional Variables");
 		List<PassFailJUnitTestCase> aPrecedingTests = getPrecedingTestInstances();
 		
 		LRUOutput anLRUOutput = (LRUOutput) aPrecedingTests.get(0);

@@ -1,4 +1,4 @@
-package gradingTools.comp530f22.assignment5;
+package gradingTools.comp530f24.assignment5;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ import grader.basics.execution.BasicRunningProject;
 import grader.basics.execution.ExecutableFinderSelector;
 import grader.basics.junit.BasicJUnitUtils;
 import gradingTools.shared.testcases.MethodExecutionTest;
-import util.trace.Tracer;
+import util.trace.*;
 
 
 @RunWith(Suite.class)
@@ -35,6 +35,8 @@ public class Assignment5Suite {
 //			BasicStaticConfigurationUtils.setModule("Comp524");
 //			BasicStaticConfigurationUtils.setProblem("Assignment1");
 //			BasicStaticConfigurationUtils.setModuleProblemAndTest(Assignment1Suite.class);
+			System.out.println(" Starting interactive tests");
+
 			BasicJUnitUtils.interactiveTest(Assignment5Suite.class);
 
 
